@@ -37,7 +37,6 @@ public class Odometer{
 			}
 		}
 	}
-	
 	public String getOdometerReading(){
 		String result = Integer.toString(reading);
 		if(result.length() < numOfDigits){
@@ -45,7 +44,6 @@ public class Odometer{
 		}
 		return result;
 	}
-	
 	public static boolean checkSequence(int read)
 	{
 		String read_string = Integer.toString(read);
@@ -58,7 +56,6 @@ public class Odometer{
 		}
 		return true;
 	}
-	
 	public String increment(int n)
 	{
 		int read = reading;
@@ -79,11 +76,8 @@ public class Odometer{
 		reading = read;
 		return getOdometerReading();
 	}
-	
-	
 	public static void main(String[] args){
 		Odometer obj = new Odometer(4,2468);
 		System.out.println(obj.increment(2));
 	}
-
 }
