@@ -11,7 +11,7 @@ public class Odometer{
 	}
 	public Odometer (int noOfDigits, int startState){
 		this.noOfDigits = noOfDigits;
-		if(isAscending(startState) && startState >= getLowest() && startState <= getHighest()){
+		if(startState >= getLowest() && startState <= getHighest()  && checkSequence(startState)){
 			reading = startState;
 		}
 		else{
@@ -37,8 +37,44 @@ public class Odometer{
 		return result;
 	}
 	
-	public boolean isAscending(int reading){
+	public static boolean checkSequence(int read)
+	{
+		String read_string = Integer.toString(read);
+		for(int i = 0 ; i < Integer.toString(read).length() - 1 ; i++)
+		{
+		   	if(read_string.charAt(i+1) - read_string.charAt(i) <= 0)
+		   	{
+		   		return false;
+		   	}
+		}
 		return true;
 	}
-
+	
+	public String getNext()
+	{
+		int read = reading;
+		while(true)
+		{
+			read++;
+			if(Integer.toString(read).length() > noOfDigits)
+			{
+				read = getLowest();
+			}
+			if(checkSequence(read))
+			{
+				reading = read;
+				break;
+			}
+		}
+		return getOdometerReading();
+	}
+	
+	public String getNthIncrement(int n)
+	{
+		for(int i = 0;i < n;i++){
+			getNext();
+		}
+		return getOdometerReading();
+	}
+	
 }
