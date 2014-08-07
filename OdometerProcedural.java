@@ -18,33 +18,30 @@ public class OdometerProcedural {
 		
 		ArrayList<Integer> str2Digits = new ArrayList<Integer>();
 		String nextState = currentState;
-		
 		Integer current = Integer.parseInt(currentState);
 		int nextElement = current;
 	
 		while(nextElement >= current){
-			nextElement ++;
-			
-			if(isAscending(nextElement)){
+			if(nextElement== Integer.parseInt((getHighestState(numOfDigits)))){
+				nextElement = Integer.parseInt(initializeOdometer(numOfDigits));
+			}
+			else{
+				nextElement ++;
+			}
+			if(isAscending(Integer.toString(nextElement))){
 				String next = Integer.toString(nextElement);
 				if(next.length() == numOfDigits -1)
 				{
 					next = "0" + next;
-					
 				}
-				System.out.println(next);
 				return next;
-				
 			}
 		}
 		
 		return "";
 	}
 	
-	public static boolean isAscending(int next){
-		
-		String nextElement =Integer.toString(next);
-		
+	public static boolean isAscending(String nextElement){
 		List<Integer> digits = new ArrayList<Integer>();
 		
 		for(int i = 0; i< nextElement.length(); i++){
@@ -72,12 +69,15 @@ public class OdometerProcedural {
 		String currentState;
 		String initialState; 
 		Integer numOfDigits = 5;
+		if(numOfDigits > 10){
+			System.out.println("Invalid number of Digits provided");
+			System.exit(0);
+		}
 		
 		initialState = initializeOdometer( numOfDigits);
 		currentState = initialState;
 		currentState = getNextState(currentState, numOfDigits);
-	
-		
+		System.out.println(currentState);
 	}
 
 }
