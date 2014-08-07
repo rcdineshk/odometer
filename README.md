@@ -11,11 +11,11 @@ We have divided the work as follows:
 
 Estimated time for each group is as follow:
 
-1. 1:30 minutes
-2. 1:30 minutes
-3. 1:30 minutes
+1. 1:30 hours
+2. 1:30 hours
+3. 1:30 hours
 
-After the 1 hours and 30 minutes, 30 minutes for integration will be required.
+After 1 hour and 30 minutes, 30 minutes for integration will be required.
 
 ======
 
@@ -32,6 +32,11 @@ OOP Implementation:-
         getHighest()
         getOdometerReading()
         
-
+Procedural Implementation:- 
+Methods implemented are
+  initialiseOdometer(int)
+  getHighestState(int)
+  get nextState(String, int)
+  isAscending(int)
         
   
