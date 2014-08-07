@@ -16,3 +16,20 @@ Estimated time for each group is as follow:
 3. 1:30 minutes
 
 After the 1 hours and 30 minutes, 30 minutes for integration will be required.
+
+======
+
+OOP Implementation:-
+
+  Class Odometer:-
+      Data Members:-
+        reading
+        noOfDigits
+      Member Functions:-
+        Odometer(int)
+        Odometer(int,int)
+        getLowest()
+        getHighest()
+        getOdometerReading()
+        
+  
