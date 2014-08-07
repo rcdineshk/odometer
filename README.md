@@ -24,12 +24,14 @@ OOP Implementation:-
   Class Odometer:-
       Data Members:-
         reading
-        noOfDigits
+        numOfDigits
       Member Functions:-
         Odometer(int)
         Odometer(int,int)
         getLowest()
         getHighest()
         getOdometerReading()
+        
+
         
   
