@@ -15,26 +15,24 @@ public class Odometer{
 			this.numOfDigits = numOfDigits;
 		}
 		this.minReading = Integer.parseInt("0123456789".substring(0, numOfDigits));
-		this.maxReading = Integer.parseInt("0123456789".substring(10 - numOfDigits,10));
+		this.maxReading = Integer.parseInt("0123456789".substring(10 - numOfDigits));
 		this.reading = minReading;
 	}
 	public Odometer (int numOfDigits, int startState){
 		if(numOfDigits > 10){
 			this.numOfDigits = 10;
-			this.minReading = Integer.parseInt("0123456789".substring(0, numOfDigits));
-			this.maxReading = Integer.parseInt("0123456789".substring(10 - numOfDigits,10));
-			this.reading = minReading;
 		}
 		else{
 			this.numOfDigits = numOfDigits;
-			this.minReading = Integer.parseInt("0123456789".substring(0, numOfDigits));
-			this.maxReading = Integer.parseInt("0123456789".substring(10 - numOfDigits,10));
-			if(startState >= minReading && startState <= maxReading  && checkSequence(startState)){
+			
+		}
+		this.minReading = Integer.parseInt("0123456789".substring(0, numOfDigits));
+		this.maxReading = Integer.parseInt("0123456789".substring(10 - numOfDigits));
+		if(startState >= minReading && startState <= maxReading  && checkSequence(startState)){
 				this.reading = startState;
 			}
-			else{
-				this.reading = minReading;
-			}
+		else{
+			this.reading = minReading;
 		}
 	}
 	public String getOdometerReading(){
@@ -44,11 +42,10 @@ public class Odometer{
 		}
 		return result;
 	}
-	public static boolean checkSequence(int read)
+	public boolean checkSequence(int read)
 	{
 		String read_string = Integer.toString(read);
-		for(int i = 0 ; i < Integer.toString(read).length() - 1 ; i++)
-		{
+		for(int i = 0 ; i < Integer.toString(read).length() - 1 ; i++){
 		   	if(read_string.charAt(i+1) <= read_string.charAt(i))
 		   	{
 		   		return false;
@@ -56,28 +53,25 @@ public class Odometer{
 		}
 		return true;
 	}
-	public String increment(int n)
+	public void increment(int n)
 	{
 		int read = reading;
 		for(int i = 0; i < n; i++){
-			while(true)
-			{
+			while(true){
 				read++;
-				if(Integer.toString(read).length() > numOfDigits)
-				{
+				if(Integer.toString(read).length() > numOfDigits){
 					read = minReading;
 				}
-				if(checkSequence(read))
-				{
+				if(checkSequence(read)){
 					break;
 				}
 			}
 		}
 		reading = read;
-		return getOdometerReading();
 	}
 	public static void main(String[] args){
-		Odometer obj = new Odometer(4,2468);
-		System.out.println(obj.increment(2));
+		Odometer obj = new Odometer(4,1234);
+		obj.increment(4);
+		System.out.println(obj.getOdometerReading());
 	}
 }
