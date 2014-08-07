@@ -1,0 +1,9 @@
+4
+0000 false
+0123 true
+6789 true
+6890 false
+9999 false
+6889 false
+6689 false
+9689 false
