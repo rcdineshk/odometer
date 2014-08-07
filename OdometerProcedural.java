@@ -58,21 +58,14 @@ public class OdometerProcedural {
 		for (int i = 0; i< nextElement.length(); i++){
 			digits.add(Character.getNumericValue(nextElement.charAt(i)));
 		}
-		
-		Collections.sort(digits);
-		for (int i = 0; i<digits.size() -1; i++){
-			if (digits.get(i) == digits.get(i+1)){
+		 
+		for (int i = 0; i < digits.size() -1; i++){
+			if (digits.get(i) >= digits.get(i+1)){
 				return false;
 			}
 		}
-		String sortedDigits = digits.toString();
-		sortedDigits = sortedDigits.replaceAll("[,\\[\\]\\s]","");
 		
-		if (sortedDigits.equals(nextElement)){
-			return true;
-		}
-		
-		return false;
+		return true;
 	}
 
 	public static void main(String[] args) {
@@ -93,6 +86,8 @@ public class OdometerProcedural {
 		currentState = getNextState(currentState, numOfDigits, highestState);
 		currentState = getNthState(currentState, numOfDigits, n , highestState);
 		System.out.println(currentState);
+		
+		
 	}
 
 }
