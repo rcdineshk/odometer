@@ -42,7 +42,7 @@ public class Odometer{
 		}
 		return result;
 	}
-	public boolean checkSequence(int read)
+	public static boolean checkSequence(int read)
 	{
 		String read_string = Integer.toString(read);
 		for(int i = 0 ; i < Integer.toString(read).length() - 1 ; i++){
@@ -53,25 +53,23 @@ public class Odometer{
 		}
 		return true;
 	}
-	public void increment(int n)
+	public void increment()
 	{
 		int read = reading;
-		for(int i = 0; i < n; i++){
-			while(true){
-				read++;
-				if(Integer.toString(read).length() > numOfDigits){
-					read = minReading;
-				}
-				if(checkSequence(read)){
-					break;
-				}
+		while(true){
+			read++;
+			if(Integer.toString(read).length() > numOfDigits){
+				read = minReading;
+			}
+			if(checkSequence(read)){
+				break;
 			}
 		}
 		reading = read;
 	}
-	public static void main(String[] args){
-		Odometer obj = new Odometer(4,1234);
-		obj.increment(4);
-		System.out.println(obj.getOdometerReading());
+	public void increment(int n){
+		for(int i = 0; i < n; i++){
+			increment();
+		}
 	}
 }
