@@ -4,6 +4,8 @@ public class Odometer{
 	
 	private int reading;
 	private int numOfDigits;
+	private int minReading;
+	private int maxReading;
 	
 	public Odometer(int numOfDigits){
 		if(numOfDigits >10){
@@ -12,32 +14,28 @@ public class Odometer{
 		else{
 			this.numOfDigits = numOfDigits;
 		}
-		this.reading = getLowest();
+		this.minReading = Integer.parseInt("0123456789".substring(0, numOfDigits));
+		this.maxReading = Integer.parseInt("0123456789".substring(10 - numOfDigits,10));
+		this.reading = minReading;
 	}
 	public Odometer (int numOfDigits, int startState){
 		if(numOfDigits > 10){
 			this.numOfDigits = 10;
-			this.reading = getLowest();
+			this.minReading = Integer.parseInt("0123456789".substring(0, numOfDigits));
+			this.maxReading = Integer.parseInt("0123456789".substring(10 - numOfDigits,10));
+			this.reading = minReading;
 		}
 		else{
 			this.numOfDigits = numOfDigits;
-			if(startState >= getLowest() && startState <= getHighest()  && checkSequence(startState)){
+			this.minReading = Integer.parseInt("0123456789".substring(0, numOfDigits));
+			this.maxReading = Integer.parseInt("0123456789".substring(10 - numOfDigits,10));
+			if(startState >= minReading && startState <= maxReading  && checkSequence(startState)){
 				this.reading = startState;
 			}
 			else{
-				this.reading = getLowest();
+				this.reading = minReading;
 			}
 		}
-	}
-	
-	public int getLowest(){
-		String lowestNumSequence = "0123456789";
-		return Integer.parseInt(lowestNumSequence.substring(0, numOfDigits));
-	}
-	
-	public int getHighest(){
-		String lowestNumSequence = "0123456789";
-		return Integer.parseInt(lowestNumSequence.substring(10 - numOfDigits,10));
 	}
 	
 	public String getOdometerReading(){
@@ -53,7 +51,7 @@ public class Odometer{
 		String read_string = Integer.toString(read);
 		for(int i = 0 ; i < Integer.toString(read).length() - 1 ; i++)
 		{
-		   	if(read_string.charAt(i+1) - read_string.charAt(i) <= 0)
+		   	if(read_string.charAt(i+1) <= read_string.charAt(i))
 		   	{
 		   		return false;
 		   	}
@@ -61,37 +59,31 @@ public class Odometer{
 		return true;
 	}
 	
-	public String getNext()
+	public String increment(int n)
 	{
 		int read = reading;
-		while(true)
-		{
-			read++;
-			if(Integer.toString(read).length() > numOfDigits)
+		for(int i = 0; i < n; i++){
+			while(true)
 			{
-				read = getLowest();
-			}
-			if(checkSequence(read))
-			{
-				reading = read;
-				break;
+				read++;
+				if(Integer.toString(read).length() > numOfDigits)
+				{
+					read = minReading;
+				}
+				if(checkSequence(read))
+				{
+					break;
+				}
 			}
 		}
+		reading = read;
 		return getOdometerReading();
 	}
 	
-	public String getNthIncrement(int n)
-	{
-		for(int i = 0;i < n;i++){
-			getNext();
-		}
-		return getOdometerReading();
-	}
 	
 	public static void main(String[] args){
-		Odometer obj = new Odometer(4,4567);
-		System.out.println(obj.getNext());
-		System.out.println(obj.getNthIncrement(5));
+		Odometer obj = new Odometer(4,2468);
+		System.out.println(obj.increment(2));
 	}
 
 }
