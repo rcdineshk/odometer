@@ -11,7 +11,7 @@ public class Odometer{
 	}
 	public Odometer (int noOfDigits, int startState){
 		this.noOfDigits = noOfDigits;
-		if(isAscending(startState) && startState >= getLowest()){
+		if(isAscending(startState) && startState >= getLowest() && startState <= getHighest()){
 			reading = startState;
 		}
 		else{
