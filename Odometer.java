@@ -77,4 +77,10 @@ public class Odometer{
 		return getOdometerReading();
 	}
 	
+	public static void main(String[] args){
+		Odometer obj = new Odometer(4,0123);
+		System.out.println(obj.getNext());
+		System.out.println(obj.getNthIncrement(5));
+	}
+	
 }
