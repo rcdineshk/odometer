@@ -2,36 +2,47 @@ package odometer;
 
 public class Odometer{
 	
-	int reading;
-	int noOfDigits;
+	private int reading;
+	private int numOfDigits;
 	
-	public Odometer(int noOfDigits){
-		this.noOfDigits = noOfDigits;
-		reading = getLowest();
-	}
-	public Odometer (int noOfDigits, int startState){
-		this.noOfDigits = noOfDigits;
-		if(startState >= getLowest() && startState <= getHighest()  && checkSequence(startState)){
-			reading = startState;
+	public Odometer(int numOfDigits){
+		if(numOfDigits >10){
+			this.numOfDigits = 10;
 		}
 		else{
-			reading = getLowest();
+			this.numOfDigits = numOfDigits;
+		}
+		this.reading = getLowest();
+	}
+	public Odometer (int numOfDigits, int startState){
+		if(numOfDigits > 10){
+			this.numOfDigits = 10;
+			this.reading = getLowest();
+		}
+		else{
+			this.numOfDigits = numOfDigits;
+			if(startState >= getLowest() && startState <= getHighest()  && checkSequence(startState)){
+				this.reading = startState;
+			}
+			else{
+				this.reading = getLowest();
+			}
 		}
 	}
 	
 	public int getLowest(){
 		String lowestNumSequence = "0123456789";
-		return Integer.parseInt(lowestNumSequence.substring(0, noOfDigits));
+		return Integer.parseInt(lowestNumSequence.substring(0, numOfDigits));
 	}
 	
 	public int getHighest(){
 		String lowestNumSequence = "0123456789";
-		return Integer.parseInt(lowestNumSequence.substring(10 - noOfDigits,10));
+		return Integer.parseInt(lowestNumSequence.substring(10 - numOfDigits,10));
 	}
 	
 	public String getOdometerReading(){
 		String result = Integer.toString(reading);
-		if(result.length() < noOfDigits){
+		if(result.length() < numOfDigits){
 			result = "0" + result;
 		}
 		return result;
@@ -56,7 +67,7 @@ public class Odometer{
 		while(true)
 		{
 			read++;
-			if(Integer.toString(read).length() > noOfDigits)
+			if(Integer.toString(read).length() > numOfDigits)
 			{
 				read = getLowest();
 			}
@@ -78,9 +89,9 @@ public class Odometer{
 	}
 	
 	public static void main(String[] args){
-		Odometer obj = new Odometer(4,0123);
+		Odometer obj = new Odometer(4,4567);
 		System.out.println(obj.getNext());
 		System.out.println(obj.getNthIncrement(5));
 	}
-	
+
 }
